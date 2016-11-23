@@ -28,7 +28,7 @@ Simple Blog System made for the Softuni Java EE Course.
 ```
 replace 'mysql-connector-jave.jar' with the filename of the JDBC jar file in the same folder.
 
-- `Configure Wildfly - Add your driver in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing <drivers> tag the following datasource:
+- `Configure Wildfly - Add your driver in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing '<drivers>' tag the following datasource:
 ```  
 <driver name="mysql" module="com.mysql.driver">
                         <driver-class>com.mysql.jdbc.Driver</driver-class>
@@ -36,7 +36,7 @@ replace 'mysql-connector-jave.jar' with the filename of the JDBC jar file in the
 		    
 ```
 
-- `Add your database as Datasource in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing <datasources> tag the following datasource:
+- `Add your database as Datasource in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing '<datasources>' tag the following datasource:
 ```
 <datasource jta="true" jndi-name="java:/SoftUniDS" pool-name="SoftUniDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:mysql://localhost:3306/blog?characterEncoding=utf8</connection-url>
