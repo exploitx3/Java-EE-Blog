@@ -1,6 +1,3 @@
-# Java-EE-JSF---Blog-
-
-
 # Blog System
 
 Simple Blog System made for the Softuni Java EE Course.
