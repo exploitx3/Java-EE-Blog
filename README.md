@@ -9,7 +9,7 @@ Simple Blog System made for the Softuni Java EE Course.
 
 ### Setup
 
-- `Start the MySql server and create the Databse`: run 'provisioning/full_db_provisioning.sql' query to create a the initial 'blog' database
+- `Start the MySql server and create the Databse`: run 'provisioning/full_db_provisioning.sql' query to create the initial 'blog' database
 - `Configure Wildfly - Create 'mysql' folder`: Create 'mysql' folder inside 'wildfly/modules/system/layers/base/'
 - `Configure Wildfly - Create 'driver' folder`: Create 'driver' folder inside 'wildfly/modules/system/layers/base/mysql/'
 - `Configure Wildfly - Add JDBC driver to Wildfly`: Download [Mysql JDBC Driver](https://dev.mysql.com/downloads/connector/j) and copy the jar file into 'wildfly/modules/system/layers/base/mysql/
