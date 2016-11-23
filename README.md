@@ -14,7 +14,8 @@ Simple Blog System made for the Softuni Java EE Course.
 - `Configure Wildfly - Create 'driver' folder`: Create 'driver' folder inside 'wildfly/modules/system/layers/base/mysql/'
 - `Configure Wildfly - Add JDBC driver to Wildfly`: Download [Mysql JDBC Driver](https://dev.mysql.com/downloads/connector/j) and copy the jar file into 'wildfly/modules/system/layers/base/mysql/
 - `Create module.xml configuration file`: Create 'wildfly/modules/system/layers/base/mysql/module.xml' file with the following content:
-```<?xml version="1.0" encoding="UTF-8"?>
+```
+<?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.1" name="com.mysql.driver">
 	<resources>
 		<resource-root path="mysql-connector-java.jar"/>
@@ -23,17 +24,21 @@ Simple Blog System made for the Softuni Java EE Course.
 		<module name="javax.api"/>
 		<module name="javax.transaction.api"/>
 	</dependencies>
-</module>```
+</module>
+```
 replace 'mysql-connector-jave.jar' with the filename of the JDBC jar file in the same folder.
 
 - `Configure Wildfly - Add your driver in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing <drivers> tag the following datasource:
-```  <driver name="mysql" module="com.mysql.driver">
+```  
+<driver name="mysql" module="com.mysql.driver">
                         <driver-class>com.mysql.jdbc.Driver</driver-class>
                     </driver>
+		    
 ```
 
 - `Add your database as Datasource in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing <datasources> tag the following datasource:
-```<datasource jta="true" jndi-name="java:/SoftUniDS" pool-name="SoftUniDS" enabled="true" use-java-context="true">
+```
+<datasource jta="true" jndi-name="java:/SoftUniDS" pool-name="SoftUniDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:mysql://localhost:3306/blog?characterEncoding=utf8</connection-url>
                     <driver>mysql</driver>
                     <pool>
