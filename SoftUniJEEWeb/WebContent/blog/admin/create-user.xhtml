@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+		  type="text/css"/>
+	<link href="#{application.contextPath}/css/bootstrap-theme.css"
+		  rel="stylesheet" type="text/css"/>
+	<script type="javascript" src="#{application.contextPath}/js/bootstrap.js"></script>
+</h:head>
+<title>#{msgs['default.title']}</title>
+<body id="commonBody">
+<ui:include src="../templates/header.xhtml"/>
+
+<h:form class="col-md-offset-3 col-md-6 form-horizontal">
+	<fieldset>
+
+		<h:form styleClass="editForm">
+			<p:messages autoUpdate="false" id="editParamMessages"
+						globalOnly="false" styleClass="messagesStyle" />
+
+			<div style="" class="col-md-3 editBox">
+				<h3 class="text-primary bold upper headPaddings">
+					<h:outputText value="#{msgs['create.user.title']}" escape="false" />
+				</h3>
+
+				<div class="box-field">
+					<label for="username">#{msgs['label.username']}</label>
+					<p:inputText id="username" name="username" styleClass="editInput"
+								 value="#{createUserBean.user.username}">
+					</p:inputText>
+				</div>
+
+				<br />
+				<div class="box-field">
+					<label for="password">#{msgs['label.password']}</label>
+					<p:password id="password" name="password" styleClass="editInput"
+								value="#{createUserBean.user.password}">
+					</p:password>
+				</div>
+				<br />
+				<div class="box-field">
+					<label for="firstName">#{msgs['label.firstName']}</label>
+					<p:inputText id="firstName" name="firstName"
+								 styleClass="editInput" value="#{createUserBean.user.firstName}">
+					</p:inputText>
+				</div>
+				<br />
+				<div class="box-field">
+					<label for="lastName" class="editlabel">#{msgs['label.lastName']}</label>
+					<p:inputText id="lastName" name="lastName" styleClass="editInput"
+								 value="#{createUserBean.user.lastName}">
+					</p:inputText>
+				</div>
+				<br />
+				<div class="box-field">
+					<label for="email">#{msgs['label.email']}</label>
+					<p:inputText id="email" name="email" styleClass="editInput"
+								 value="#{createUserBean.user.email}">
+					</p:inputText>
+				</div>
+
+				<div class="box-field">
+					<label for="type">#{msgs['label.userType']}</label>
+					<h:selectOneMenu id="type" name="type" value="#{createUserBean.user.type}"
+									 label="#{msgs['label.userType']}">
+						<f:selectItem itemLabel="NormalUser" itemValue="NormalUser"/>
+						<f:selectItem itemLabel="Administrator" itemValue="Administrator"/>
+					</h:selectOneMenu>
+				</div>
+
+				<br />
+
+				<div class="box-field">
+					<p:commandButton ajax="false" id="updateuserBtn"
+									 styleClass="btn btn-primary createUserBtn"
+									 value="#{msgs['button.createUser']}"
+									 action="#{createUserBean.createAction}">
+					</p:commandButton>
+
+				</div>
+
+			</div>
+		</h:form>
+	</fieldset>
+</h:form>
+
+</body>
+</html>
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="#{application.contextPath}/css/bootstrap-theme.css"
+          rel="stylesheet" type="text/css"/>
+    <script type="javascript" src="#{application.contextPath}/js/bootstrap.js"></script>
+</h:head>
+<title>#{msgs['default.title']}</title>
+<body id="commonBody">
+<ui:include src="../templates/header.xhtml"/>
+
+<p:messages autoUpdate="true" id="addCommentMessages"
+            globalOnly="true" styleClass="loginMessage"/>
+
+<h:form id="post-details-form" class="col-md-offset-3 col-md-6 form-horizontal">
+    <fieldset>
+        <p:outputPanel class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">#{postDetailsBean.post.title}</h2>
+            </div>
+            <div class="panel-body">
+                #{postDetailsBean.post.content}
+            </div>
+            <div class="panel-footer">
+                <h:outputText value="#{msgs['label.post.prop.author']}:"/>
+                <h:outputText value="#{postDetailsBean.post.author.username}"/>
+                <br/>
+                <h:outputText value="#{msgs['label.post.prop.date']}:"/>
+                <h:outputText value="#{postDetailsBean.post.date}"/>
+                <br/>
+                <h:outputText value="#{msgs['label.post.prop.visits']}:"/>
+                <h:outputText value="#{postDetailsBean.post.visits}"/>
+                <br/>
+                <h:outputText>#{msgs['label.post.prop.tags']}:</h:outputText>
+                <div class="bs-component" style="margin-bottom: 40px;">
+                    <p:dataList value="#{postDetailsBean.post.tags}" var="tag" itemStyleClass="label label-primary" itemType="none">
+                        <h:link value="#{tag.name}"
+                                outcome="/blog/tags/pages-for-tag.xhtml">
+                            <f:param name="id" value="#{tag.id}"/>
+                        </h:link>
+                    </p:dataList>
+                </div>
+                <br/>
+                <p:commandButton styleClass="btn" value="#{msgs['button.post.edit-post']}"
+                                 rendered="#{postDetailsBean.shouldShowPostButtons()}"
+                                 type="button" onclick="PF('editDialog').show();">
+                </p:commandButton>
+                <p:commandButton styleClass="btn btn-danger" value="#{msgs['button.post.delete-post']}"
+                                 rendered="#{postDetailsBean.shouldShowPostButtons()}"
+                                 type="button" onclick="PF('deleteDialog').show();">
+                </p:commandButton>
+                <h3>#{msgs['label.post.prop.comments']}:</h3>
+                <p:dataList rendered="#{!postDetailsBean.comments.isEmpty()}" value="#{postDetailsBean.comments}"
+                            var="comment" itemType="none">
+
+                    <div class="row">
+                    <div class="col-sm-2">
+                        <div class="thumbnail">
+                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+                        </div><!-- /thumbnail -->
+                    </div><!-- /col-sm-1 -->
+
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>#{comment.author.username}</strong> <span class="text-muted"> - #{comment.title}</span>
+                            </div>
+                            <div class="panel-body">
+                                #{comment.content}
+                            </div>
+                            <p>#{msgs['label.comment.prop.date']}: #{comment.date}</p><!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                    </div><!-- /col-sm-5 -->
+                    </div>
+                    <p:commandButton styleClass="btn" value="#{msgs['button.comment.delete']}" immediate="true" process="@this"
+                                     rendered="#{postDetailsBean.couldDeleteComment(comment.id)}"
+                                     actionListener="#{postDetailsBean.deleteComment}">
+                        <f:attribute name="comment" value="#{comment}"/>
+                    </p:commandButton>
+
+                </p:dataList>
+            </div>
+        </p:outputPanel>
+
+
+        <h:form styleClass="jumbotron" id="addCommentForm" rendered="#{postDetailsBean.couldAddComment()}">
+            <h3 style="margin-top:0">#{msgs['label.post.add-comment']}</h3>
+            <p:inputText value="#{postDetailsBean.newComment.title}" id="title"
+                         styleClass="loginInputField" required="true"
+                         requiredMessage="Title is Required">
+                <p:watermark for="title" value="Title"/>
+            </p:inputText>
+            <p:editor id="editor" required="true"
+                      requiredMessage="#{msgs['code_error_required']}" widgetVar="editorWidget"
+                      value="#{postDetailsBean.newComment.content}" width="400"/>
+
+            <h:panelGrid columns="2" style="margin-top: 10px">
+                <p:commandButton value="#{msgs['button.post.add-comment']}" action="#{postDetailsBean.addComment()}" icon="ui-icon-disk"/>
+
+                <p:commandButton value="#{msgs['button.comment.clear']}" type="button" onclick="PF('editorWidget').clear();"
+                                 icon="ui-icon-close"/>
+            </h:panelGrid>
+        </h:form>
+    </fieldset>
+</h:form>
+
+
+
+
+
+<p:dialog id="deleteDialog" header="#{msgs['label.comment.delete-comment-dialog.title']}"
+          widgetVar="deleteDialog"
+          minHeight="100">
+    <h:form>
+            <div class="modal-title">
+                <h3>#{msgs['label.post.prop.title']}: #{postDetailsBean.post.title}</h3>
+            </div>
+            <div class="modal-body">
+                <h3>#{msgs['label.post.prop.content']}:</h3>
+                 <p>#{postDetailsBean.post.content}</p>
+                <h3>#{msgs['label.post.prop.author']}: #{postDetailsBean.post.author.username}</h3>
+                <h3>#{msgs['label.post.prop.date']}: #{postDetailsBean.post.date}</h3>
+            </div>
+            <div class="modal-footer">
+                <p:commandButton styleClass="btn" value="#{msgs['button.comment.delete']}" action="#{postDetailsBean.deletePost()}"/>
+
+                <p:commandButton styleClass="btn" value="#{msgs['button.comment.close']}" onclick="PF('deleteDialog').hide();"/>
+            </div>
+    </h:form>
+</p:dialog>
+
+<p:dialog id="editDialog" header="#{postDetailsBean.post.title}" widgetVar="editDialog"
+          minHeight="100">
+    <h:form>
+            <div class="modal-title">
+                <label for="editted-post-title">#{msgs['label.post.prop.title']}</label>
+                <p:inputText id="editted-post-title" name="title" styleClass="editInput"
+                             value="#{postDetailsBean.post.title}">
+                </p:inputText>
+            </div>
+            <div class="modal-body">
+                <label for="editted-post-content">#{msgs['label.post.prop.content']}</label>
+                <p:inputText id="editted-post-content" name="content" styleClass="editInput"
+                             value="#{postDetailsBean.post.content}">
+                </p:inputText>
+            </div>
+            <div class="modal-footer">
+                <p:commandButton value="#{msgs['button.save']}" update="post-details-form" action="#{postDetailsBean.editPost()}"/>
+                <p:commandButton value="#{msgs['button.close']}" onclick="PF('editDialog').hide();"/>
+            </div>
+    </h:form>
+</p:dialog>
+
+</body>
+</html>

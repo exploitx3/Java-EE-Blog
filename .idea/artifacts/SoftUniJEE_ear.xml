@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="ear" name="SoftUniJEE:ear">
+    <output-path>$PROJECT_DIR$/SoftUniJEE/target</output-path>
+    <root id="archive" name="SoftUniJEE-0.0.1-SNAPSHOT.ear">
+      <element id="artifact" artifact-name="SoftUniJEE:ear exploded" />
+    </root>
+  </artifact>
+</component>

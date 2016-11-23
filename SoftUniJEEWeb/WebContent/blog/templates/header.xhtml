@@ -1,0 +1,50 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/blog/home.html">Blog</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li><p:link rendered="#{LOGGED_USER == null}" outcome="/blog/login.html">#{msgs['label.header.button.login']}</p:link></li>
+                    <li><p:link rendered="#{LOGGED_USER == null}" outcome="/blog/register-user.html">#{msgs['label.header.button.register']}</p:link></li>
+                    <li><p:link rendered="#{LOGGED_USER != null}" outcome="/blog/posts.html">#{msgs['label.header.button.posts']}</p:link></li>
+                    <li><p:link rendered="#{LOGGED_USER != null}" outcome="/blog/posts/create-post.html">#{msgs['label.header.button.create-post']}</p:link></li>
+                    <li><p:link rendered="#{LOGGED_USER.type == 'Administrator'}" outcome="/blog/admin/admin-panel.html">#{msgs['label.header.button.admin-panel']}</p:link></li>
+                </ul>
+                <div class="navbar-form navbar-left" role="search">
+                    <h:form styleClass="form-group">
+                        <h:inputText styleClass="form-control" value="#{headerBean.searchText}"
+                                     type="text">
+                        </h:inputText>
+
+                        <h:commandLink ajax="false" id="searchButton" action="#{headerBean.search()}"
+                                       class="btn btn-default">
+                            <f:param name="name" value="#{headerBean.searchText}"/>
+                            <h:outputText value="#{msgs['label.header.button.search']}"/>
+                        </h:commandLink>
+                    </h:form>
+                </div>
+                <h:form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><p:link rendered="#{LOGGED_USER != null}"
+                                outcome="/blog/user/profile.html">#{LOGGED_USER.username}</p:link></li>
+                    <li><p:commandLink rendered="#{LOGGED_USER != null}"
+                                       value="#{msgs['label.header.button.logout']}"
+                                       action="#{headerBean.logout()}"
+                                       ajax="false"/></li>
+                </ul>
+                </h:form>
+            </div>
+        </div>
+    </nav>
+</ui:composition>

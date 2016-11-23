@@ -1,0 +1,47 @@
+
+CREATE TABLE USERS
+(
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  username VARCHAR(30),
+  password VARCHAR(200),
+  first_name VARCHAR(30),
+  last_name VARCHAR(30),
+  email VARCHAR(50),
+  type VARCHAR(50) DEFAULT 'NormalUser'
+);
+
+CREATE TABLE POSTS
+(
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  author_id INT(11) NOT NULL,
+  title VARCHAR(50),
+  content TEXT,
+  date DATE,
+  visits INT(11) DEFAULT '0',
+  CONSTRAINT id FOREIGN KEY (author_id) REFERENCES USERS (id)
+);
+
+CREATE TABLE COMMENTS
+(
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  author_id INT(11) NOT NULL,
+  post_id INT(11) NOT NULL,
+  title VARCHAR(50),
+  content TEXT,
+  date DATE,
+  CONSTRAINT author_id FOREIGN KEY (author_id) REFERENCES USERS (id),
+  CONSTRAINT post_id FOREIGN KEY (post_id) REFERENCES POSTS (id)
+);
+CREATE INDEX author_id ON COMMENTS (author_id);
+CREATE INDEX post_id ON COMMENTS (post_id);
+CREATE TABLE TAGS
+(
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(15)
+);
+CREATE TABLE POST_TAG
+(
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  post_id INT(11) NOT NULL,
+  tag_id INT(11) NOT NULL
+);

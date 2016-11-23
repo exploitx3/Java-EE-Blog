@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="#{application.contextPath}/css/bootstrap-theme.css"
+          rel="stylesheet" type="text/css"/>
+    <script type="javascript" src="#{application.contextPath}/js/bootstrap.js"></script>
+</h:head>
+<title>#{msgs['default.title']}</title>
+
+<body id="loginBody">
+<ui:include src="../templates/header.xhtml"/>
+
+<p:messages autoUpdate="true" id="addCommentMessages"
+            globalOnly="true" styleClass="loginMessage"/>
+
+<h:form class="form-horizontal">
+    <fieldset class="col-md-offset-3 col-md-6">
+        <legend>Create Post:</legend>
+        <h:form id="addPostForm">
+            <h3 style="margin-top:0">Add Post</h3>
+            <p:inputText value="#{createPostBean.post.title}" id="title"
+                         styleClass="loginInputField">
+                <p:watermark for="title" value="Title"/>
+            </p:inputText>
+            <p:editor id="editor" widgetVar="editorWidget"
+                      value="#{createPostBean.post.content}" width="400"/>
+
+            <h:panelGrid styleClass="jumbotron" id="tag-grid" columns="2" style="margin-top: 10px">
+                <label for="tag-name">Tag:</label>
+                <p:dataList id="tagsList" rendered="#{!createPostBean.tags.isEmpty()}" value="#{createPostBean.tags}"
+                            var="tag"
+                            itemType="none"
+                            itemStyleClass="label label-info">
+                    #{tag}
+                </p:dataList>
+                <p:inputText id="tag-name" name="tag-name" styleClass="editInput"
+                             value="#{createPostBean.tagName}">
+                </p:inputText>
+
+                <p:commandButton value="#{msgs['label.post.add-tag']}" action="#{createPostBean.addTag()}" update="tag-grid"
+                                 icon="ui-icon-close">
+                </p:commandButton>
+            </h:panelGrid>
+            <div>
+                <p:commandButton value="#{msgs['button.create-post']}" action="#{createPostBean.createAction()}" icon="ui-icon-disk"/>
+
+                <p:commandButton value="#{msgs['button.comment.clear']}" type="button" onclick="PF('editorWidget').clear();"
+                                 icon="ui-icon-close"/>
+            </div>
+
+
+        </h:form>
+
+    </fieldset>
+</h:form>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="ejb-jar" name="SoftUniJEEEJB:ejb">
+    <output-path>$PROJECT_DIR$/SoftUniJEEEJB/target</output-path>
+    <root id="archive" name="SoftUniJEEEJB-0.0.1-SNAPSHOT.jar">
+      <element id="artifact" artifact-name="SoftUniJEEEJB:ejb exploded" />
+    </root>
+  </artifact>
+</component>

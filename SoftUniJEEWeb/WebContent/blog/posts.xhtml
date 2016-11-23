@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="#{application.contextPath}/css/bootstrap-theme.css"
+          rel="stylesheet" type="text/css"/>
+    <script type="javascript" src="#{application.contextPath}/js/bootstrap.js"></script>
+</h:head>
+<title>#{msgs['default.title']}</title>
+<body id="commonBody">
+<ui:include src="templates/header.xhtml"/>
+
+<p:messages autoUpdate="true" id="addCommentMessages"
+            globalOnly="true" styleClass="loginMessage"/>
+
+<h:form class="col-md-offset-4 col-md-4 form-horizontal">
+    <fieldset>
+        <p:dataScroller value="#{showPostsBean.getAllPosts()}" var="post" chunkSize="4">
+            <p:outputPanel class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 class="panel-title">#{post.title}:</h2>
+                </div>
+                <div class="panel-body">
+                    #{post.content.length() gt 101 ? post.content.substring(0,100).concat('...') : post.content}
+                </div>
+                <div class="panel-footer">
+                    <h:outputText value="#{msgs['label.post.prop.author']}:"/>
+                    <h:outputText value="#{post.author.username}"/>
+                    <br/>
+                    <h:outputText value="#{msgs['label.post.prop.date']}:"/>
+                    <h:outputText value="#{post.date}"/>
+                    <br/>
+                    <h:link styleClass="btn btn-info" value="#{msgs['button.post.details']}" outcome="/blog/posts/post-details.xhtml">
+                        <f:param name="id" value="#{post.id}"/>
+                    </h:link>
+                </div>
+            </p:outputPanel>
+        </p:dataScroller>
+    </fieldset>
+</h:form>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SoftUniJEE/SoftUniJEE.iml" filepath="$PROJECT_DIR$/SoftUniJEE/SoftUniJEE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftUniJEE-ParentProject.iml" filepath="$PROJECT_DIR$/SoftUniJEE-ParentProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftUniJEEEJB/SoftUniJEEEJB.iml" filepath="$PROJECT_DIR$/SoftUniJEEEJB/SoftUniJEEEJB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftUniJEEWeb/SoftUniJEEWeb.iml" filepath="$PROJECT_DIR$/SoftUniJEEWeb/SoftUniJEEWeb.iml" />
+    </modules>
+  </component>
+</project>

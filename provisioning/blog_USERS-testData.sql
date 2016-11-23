@@ -1,0 +1,3 @@
+INSERT INTO blog.USERS (username, password, first_name, last_name, email, type) VALUES ('Admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Admin', 'Admin', 'georgi@abv.bg', 'Administrator');
+INSERT INTO blog.USERS (username, password, first_name, last_name, email, type) VALUES ('Gosho', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Goergi', 'SomeOne', 'Georgi@abv.bg', 'NormalUser');
+INSERT INTO blog.USERS (username, password, first_name, last_name, email, type) VALUES ('Pesho', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Petar', 'Petrov', 'pesho@abv.bg', 'NormalUser');

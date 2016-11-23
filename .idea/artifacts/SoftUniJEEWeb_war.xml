@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SoftUniJEEWeb:war">
+    <output-path>$PROJECT_DIR$/SoftUniJEEWeb/target</output-path>
+    <root id="archive" name="SoftUniJEEWeb-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="SoftUniJEEWeb:war exploded" />
+    </root>
+  </artifact>
+</component>
