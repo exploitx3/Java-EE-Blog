@@ -3,10 +3,9 @@
 Simple Blog System made for the Softuni Java EE Course.
 
 ### Prerequisites
-
-MySql Server
-Java EE Server(Wildfly)
-Maven
+- `MySql Server`
+- `Java EE Server(Wildfly)`
+- `Maven`
 
 ### Setup
 
