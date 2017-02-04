@@ -13,20 +13,19 @@ Simple Blog System made for the Softuni Java EE Course.
 - `Configure Wildfly`: Create 'mysql' folder inside 'wildfly/modules/system/layers/base/'
 - `Configure Wildfly`: Create 'driver' folder inside 'wildfly/modules/system/layers/base/mysql/'
 - `Configure Wildfly`:  Add JDBC driver to Wildfly. Download [Mysql JDBC Driver](https://dev.mysql.com/downloads/connector/j) and copy the jar file into 'wildfly/modules/system/layers/base/mysql/
-- `Configure WildFly`: Create module.xml configuration file in 'wildfly/modules/system/layers/base/mysql/module.xml' with the following content:
+- `Configure WildFly`: Create module.xml configuration file in with the following commands:
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.1" name="com.mysql.driver">
-	<resources>
-		<resource-root path="mysql-connector-java.jar"/>
-	</resources>
-	<dependencies>
-		<module name="javax.api"/>
-		<module name="javax.transaction.api"/>
-	</dependencies>
-</module>
+C:\User\wildfly-10.1.0.Final\bin>jboss-cli.bat
+You are disconnected at the moment. Type 'connect' to connect to the server or 'help' for the list of supported commands.
+[disconnected /] connect
+[standalone@localhost:9990 /]  module add --name=com.mysql.driver  --dependencies=javax.api,javax.transaction.api --resources=/PATH/TO/mysql-connector-java.jar  
+[standalone@localhost:9990 /] :reload  
+{  
+    "outcome" => "success",  
+    "result" => undefined  
+}  
 ```
-replace 'mysql-connector-java.jar' with the filename of the JDBC jar file in the same folder.
+replace 'mysql-connector-java.jar' with the filename of the JDBC jar file.
 
 - `Configure Wildfly`: Add your driver in Wildfly configuration in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing 'drivers' tag the following datasource:
 ```  
