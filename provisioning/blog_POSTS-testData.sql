@@ -1,4 +1,4 @@
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'Why do we use it?', '
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (1, 'Why do we use it?', '
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis 
 velit vel tellus mollis porttitor. Fusce semper et nibh vitae dignissim.
  Maecenas semper dignissim tellus, eget dictum erat eleifend in. Etiam 
@@ -12,7 +12,7 @@ egestas ornare suscipit. In blandit dolor ac ante aliquam, eget faucibus
  augue semper. Donec varius sodales consectetur. Sed ornare quam in 
 neque venenatis sollicitudin sed ut enim.
 ', '2016-11-21', 0);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'New Post', '
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (2, 'New Post', '
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis 
 velit vel tellus mollis porttitor. Fusce semper et nibh vitae dignissim.
  Maecenas semper dignissim tellus, eget dictum erat eleifend in. Etiam 
@@ -26,7 +26,7 @@ egestas ornare suscipit. In blandit dolor ac ante aliquam, eget faucibus
  augue semper. Donec varius sodales consectetur. Sed ornare quam in 
 neque venenatis sollicitudin sed ut enim.
 ', '2016-11-21', 0);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'Maecenas feugiat arcu pellentesque', 'Maecenas feugiat arcu pellentesque, auctor felis sed, lacinia urna. 
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (3, 'Maecenas feugiat arcu pellentesque', 'Maecenas feugiat arcu pellentesque, auctor felis sed, lacinia urna. 
 Maecenas suscipit aliquam est, nec semper tortor. Maecenas rhoncus 
 sapien ut tellus lobortis, in sagittis leo vulputate. In fermentum 
 efficitur ligula, nec vehicula elit tincidunt non. Maecenas dignissim 
@@ -40,7 +40,7 @@ Morbi tristique, quam non imperdiet pretium, odio sem ornare enim, non
 scelerisque diam ante finibus mauris. Pellentesque lacinia cursus lectus
  vehicula facilisis.
 ', '2016-11-21', 8);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'Classes are cool', 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per 
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (1, 'Classes are cool', 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per 
 inceptos himenaeos. Quisque accumsan nulla ut orci imperdiet eleifend. 
 Phasellus maximus nec neque id faucibus. Vestibulum in ex at turpis 
 ultrices varius in a quam. Nunc ornare ac urna quis faucibus. Aliquam 
@@ -53,7 +53,7 @@ porttitor sem nec neque lobortis vehicula. Curabitur vitae tincidunt
 nunc, a ullamcorper dolor. Phasellus nibh mi, ultrices vel aliquam quis,
  posuere nec nisl.
 ', '2016-11-21', 23);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (7, 'Morbi sit amet nulla felis', 'Morbi sit amet nulla felis. Praesent bibendum vulputate mi, in sodales 
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (2, 'Morbi sit amet nulla felis', 'Morbi sit amet nulla felis. Praesent bibendum vulputate mi, in sodales 
 sem varius molestie. Phasellus non nulla tincidunt, gravida leo quis, 
 hendrerit ligula. Donec ullamcorper porta neque vitae tincidunt. Ut 
 tincidunt sagittis sem, sit amet lacinia massa dignissim et. Fusce sit 
@@ -62,4 +62,4 @@ sem varius molestie. Phasellus non nulla tincidunt, gravida leo quis,
 hendrerit ligula. Donec ullamcorper porta neque vitae tincidunt. Ut 
 tincidunt sagittis sem, sit amet lacinia massa dignissim et. Fusce sit 
 amet sem eget tortor sodales suscipit. V', '2016-11-21', 0);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (7, 'Pesho plet plete', 'Morbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis pesho', '2016-11-21', 14);
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (1, 'Pesho plet plete', 'Morbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis pesho', '2016-11-21', 14);

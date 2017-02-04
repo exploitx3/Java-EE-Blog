@@ -1,3 +1,5 @@
+CREATE DATABASE blog;
+USE blog;
 
 CREATE TABLE USERS
 (
@@ -51,26 +53,7 @@ INSERT INTO blog.USERS (username, password, first_name, last_name, email, type) 
 INSERT INTO blog.USERS (username, password, first_name, last_name, email, type) VALUES ('Gosho', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Goergi', 'SomeOne', 'Georgi@abv.bg', 'NormalUser');
 INSERT INTO blog.USERS (username, password, first_name, last_name, email, type) VALUES ('Pesho', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Petar', 'Petrov', 'pesho@abv.bg', 'NormalUser');
 
-
-INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (7, 70, 'Agree', 'Yes I agree.<br>', '2016-11-21');
-INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (7, 70, 'Although', 'Although functions are useful too', '2016-11-21');
-INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (6, 69, 'New Comment', 'Comment', '2016-11-21');
-INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (6, 70, 'LastComment', 'This is the last comment', '2016-11-21');
-
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (67, 70);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (67, 71);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (68, 72);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (68, 73);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (69, 74);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (69, 75);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (70, 76);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (70, 77);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (70, 78);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (71, 79);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (72, 80);
-INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (72, 81);
-
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'Why do we use it?', '
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (1, 'Why do we use it?', '
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis
 velit vel tellus mollis porttitor. Fusce semper et nibh vitae dignissim.
  Maecenas semper dignissim tellus, eget dictum erat eleifend in. Etiam
@@ -84,7 +67,7 @@ egestas ornare suscipit. In blandit dolor ac ante aliquam, eget faucibus
  augue semper. Donec varius sodales consectetur. Sed ornare quam in
 neque venenatis sollicitudin sed ut enim.
 ', '2016-11-21', 0);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'New Post', '
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (2, 'New Post', '
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis
 velit vel tellus mollis porttitor. Fusce semper et nibh vitae dignissim.
  Maecenas semper dignissim tellus, eget dictum erat eleifend in. Etiam
@@ -98,7 +81,7 @@ egestas ornare suscipit. In blandit dolor ac ante aliquam, eget faucibus
  augue semper. Donec varius sodales consectetur. Sed ornare quam in
 neque venenatis sollicitudin sed ut enim.
 ', '2016-11-21', 0);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'Maecenas feugiat arcu pellentesque', 'Maecenas feugiat arcu pellentesque, auctor felis sed, lacinia urna.
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (3, 'Maecenas feugiat arcu pellentesque', 'Maecenas feugiat arcu pellentesque, auctor felis sed, lacinia urna.
 Maecenas suscipit aliquam est, nec semper tortor. Maecenas rhoncus
 sapien ut tellus lobortis, in sagittis leo vulputate. In fermentum
 efficitur ligula, nec vehicula elit tincidunt non. Maecenas dignissim
@@ -112,7 +95,7 @@ Morbi tristique, quam non imperdiet pretium, odio sem ornare enim, non
 scelerisque diam ante finibus mauris. Pellentesque lacinia cursus lectus
  vehicula facilisis.
 ', '2016-11-21', 8);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (6, 'Classes are cool', 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (2, 'Classes are cool', 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
 inceptos himenaeos. Quisque accumsan nulla ut orci imperdiet eleifend.
 Phasellus maximus nec neque id faucibus. Vestibulum in ex at turpis
 ultrices varius in a quam. Nunc ornare ac urna quis faucibus. Aliquam
@@ -125,7 +108,7 @@ porttitor sem nec neque lobortis vehicula. Curabitur vitae tincidunt
 nunc, a ullamcorper dolor. Phasellus nibh mi, ultrices vel aliquam quis,
  posuere nec nisl.
 ', '2016-11-21', 23);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (7, 'Morbi sit amet nulla felis', 'Morbi sit amet nulla felis. Praesent bibendum vulputate mi, in sodales
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (1, 'Morbi sit amet nulla felis', 'Morbi sit amet nulla felis. Praesent bibendum vulputate mi, in sodales
 sem varius molestie. Phasellus non nulla tincidunt, gravida leo quis,
 hendrerit ligula. Donec ullamcorper porta neque vitae tincidunt. Ut
 tincidunt sagittis sem, sit amet lacinia massa dignissim et. Fusce sit
@@ -134,7 +117,7 @@ sem varius molestie. Phasellus non nulla tincidunt, gravida leo quis,
 hendrerit ligula. Donec ullamcorper porta neque vitae tincidunt. Ut
 tincidunt sagittis sem, sit amet lacinia massa dignissim et. Fusce sit
 amet sem eget tortor sodales suscipit. V', '2016-11-21', 0);
-INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (7, 'Pesho plet plete', 'Morbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis pesho', '2016-11-21', 14);
+INSERT INTO blog.POSTS (author_id, title, content, date, visits) VALUES (2, 'Pesho plet plete', 'Morbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis peshoMorbi sit amet nulla felis pesho Morbi sit amet nulla felis pesho', '2016-11-21', 14);
 
 INSERT INTO blog.TAGS (name) VALUES ('why');
 INSERT INTO blog.TAGS (name) VALUES ('lorem');
@@ -148,3 +131,22 @@ INSERT INTO blog.TAGS (name) VALUES ('cool');
 INSERT INTO blog.TAGS (name) VALUES ('test');
 INSERT INTO blog.TAGS (name) VALUES ('pesho');
 INSERT INTO blog.TAGS (name) VALUES ('test');
+
+INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (1, 1, 'Agree', 'Yes I agree.<br>', '2016-11-21');
+INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (2, 2, 'Although', 'Although functions are useful too', '2016-11-21');
+INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (3, 6, 'New Comment', 'Comment', '2016-11-21');
+INSERT INTO blog.COMMENTS (author_id, post_id, title, content, date) VALUES (1, 4, 'LastComment', 'This is the last comment', '2016-11-21');
+
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (1, 7);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (6, 1);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (6, 2);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (6, 3);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (6, 4);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (6, 5);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (2, 6);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (3, 7);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (2, 8);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (1, 9);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (2, 10);
+INSERT INTO blog.POST_TAG (post_id, tag_id) VALUES (2, 11);
+
