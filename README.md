@@ -57,6 +57,7 @@ If you do not use the default mysql credentials edit the 'security' tag with the
 - `Run Wildfly`: execute '/wildfly/bin/standalone.sh' script
 - `Browse the App`: 'http://localhost:8080/' 
 
+![alt tag](http://puu.sh/tO8aT/c15dbe7b1b.png)
 
 
 ## Built With
