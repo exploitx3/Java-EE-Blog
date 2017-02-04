@@ -9,11 +9,11 @@ Simple Blog System made for the Softuni Java EE Course.
 
 ### Setup
 
-- `Start the MySql server and create the Databse`: run 'provisioning/full_db_provisioning.sql' query to create the initial 'blog' database
-- `Configure Wildfly - Create 'mysql' folder`: Create 'mysql' folder inside 'wildfly/modules/system/layers/base/'
-- `Configure Wildfly - Create 'driver' folder`: Create 'driver' folder inside 'wildfly/modules/system/layers/base/mysql/'
-- `Configure Wildfly - Add JDBC driver to Wildfly`: Download [Mysql JDBC Driver](https://dev.mysql.com/downloads/connector/j) and copy the jar file into 'wildfly/modules/system/layers/base/mysql/
-- `Create module.xml configuration file`: Create 'wildfly/modules/system/layers/base/mysql/module.xml' file with the following content:
+- `Provision the Database`: Star MySql and execute 'provisioning/full_db_provisioning.sql' to create the initial 'blog' database
+- `Configure Wildfly`: Create 'mysql' folder inside 'wildfly/modules/system/layers/base/'
+- `Configure Wildfly`: Create 'driver' folder inside 'wildfly/modules/system/layers/base/mysql/'
+- `Configure Wildfly`:  Add JDBC driver to Wildfly. Download [Mysql JDBC Driver](https://dev.mysql.com/downloads/connector/j) and copy the jar file into 'wildfly/modules/system/layers/base/mysql/
+- `Configure WildFly`: Create module.xml configuration file in 'wildfly/modules/system/layers/base/mysql/module.xml' with the following content:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.1" name="com.mysql.driver">
@@ -26,9 +26,9 @@ Simple Blog System made for the Softuni Java EE Course.
 	</dependencies>
 </module>
 ```
-replace 'mysql-connector-jave.jar' with the filename of the JDBC jar file in the same folder.
+replace 'mysql-connector-java.jar' with the filename of the JDBC jar file in the same folder.
 
-- `Configure Wildfly - Add your driver in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing 'drivers' tag the following datasource:
+- `Configure Wildfly`: Add your driver in Wildfly configuration in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing 'drivers' tag the following datasource:
 ```  
 <driver name="mysql" module="com.mysql.driver">
                         <driver-class>com.mysql.jdbc.Driver</driver-class>
@@ -36,7 +36,7 @@ replace 'mysql-connector-jave.jar' with the filename of the JDBC jar file in the
 		    
 ```
 
-- `Add your database as Datasource in Wildfly configuration`: in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing 'datasources' tag the following datasource:
+- `Configure Wildfly`: Add your database as Datasource in Wildfly configuration in 'wildfly/standalone/configuration/standalone.xml' add inside the already existing 'datasources' tag the following datasource:
 ```
 <datasource jta="true" jndi-name="java:/SoftUniDS" pool-name="SoftUniDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:mysql://localhost:3306/blog?characterEncoding=utf8</connection-url>
@@ -53,8 +53,8 @@ replace 'mysql-connector-jave.jar' with the filename of the JDBC jar file in the
 ```
 If you do not use the default mysql credentials edit the 'security' tag with the proper credentials
 
-- `Run Maven`: In the parent directory run 'mvn install' to provision the application
-- `Copy the generated EAR into Wildfly`: copy the created 'SoftUniJEE/target/SoftUniJEE-0.0.1-SNAPSHOT.ear' into wildfly/standalone/deployments/
+- `Provision the Blog`: In the parent directory run 'mvn install' to provision the application using Maven.
+- `Add the Project to WildFly`: Copy the created 'SoftUniJEE/target/SoftUniJEE-0.0.1-SNAPSHOT.ear' into wildfly/standalone/deployments/
 - `Run Wildfly`: execute '/wildfly/bin/standalone.sh' script
 - `Browse the App`: 'http://localhost:8080/' 
 
