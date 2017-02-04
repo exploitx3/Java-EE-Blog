@@ -58,6 +58,9 @@ If you do not use the default mysql credentials edit the 'security' tag with the
 - `Browse the App`: 'http://localhost:8080/' 
 
 ![alt tag](http://puu.sh/tO8aT/c15dbe7b1b.png)
+![alt tag](http://puu.sh/tO8kD/78b74a4722.png)
+![alt tag](http://puu.sh/tO8uc/57ce97fdec.png)
+![alt tag](https://puu.sh/tO8sH/726e49ee52.png)
 
 
 ## Built With
