@@ -67,6 +67,7 @@ Run with docker:
 mvn install:install-file -DgroupId=javax.transaction -DartifactId=jta -Dversion=1.0.1B -Dpackaging=jar -Dfile=jta-1.0.1B.jar
 ```
 - `Provision the Blog`: In the parent directory run 'mvn install' to provision the application using Maven.
+- `Setup the ear`: Copy the created 'SoftUniJEE/target/SoftUniJEE-0.0.1-SNAPSHOT.ear' into "provisioning/docker/customization"
 - `Build docker image`: execute "docker build . -t blog/wildfly" in "provisioning/docker/" directory
 - `Start Application`: execute "docker-compose up -d" in "provisioning/docker/" directory
 - `Browse the App`: 'http://localhost:8080/' 
