@@ -9,7 +9,7 @@ Simple Blog System made for the Softuni Java EE Course.
 
 ### Setup
 
-- `Provision the Database`: Star MySql and execute 'provisioning/full_db_provisioning.sql' to create the initial 'blog' database
+- `Provision the Database`: Star MySql and execute 'provisioning/full_db_provisioning.sql' to create the initial 'blog' database and execute the queries in full_db_provisioning.sql file
 - `Configure Wildfly`: Create 'mysql' folder inside 'wildfly/modules/system/layers/base/'
 - `Configure Wildfly`: Create 'driver' folder inside 'wildfly/modules/system/layers/base/mysql/'
 - `Configure Wildfly`:  Add JDBC driver to Wildfly. Download [Mysql JDBC Driver](https://dev.mysql.com/downloads/connector/j) and copy the jar file into 'wildfly/modules/system/layers/base/mysql/
@@ -52,10 +52,25 @@ replace 'mysql-connector-java.jar' with the filename of the JDBC jar file.
 ```
 If you do not use the default mysql credentials edit the 'security' tag with the proper credentials
 
+- `install required dependencies`: In the directory "provisioning/lib/" execute:
+```
+mvn install:install-file -DgroupId=javax.transaction -DartifactId=jta -Dversion=1.0.1B -Dpackaging=jar -Dfile=jta-1.0.1B.jar
+```
 - `Provision the Blog`: In the parent directory run 'mvn install' to provision the application using Maven.
 - `Add the Project to WildFly`: Copy the created 'SoftUniJEE/target/SoftUniJEE-0.0.1-SNAPSHOT.ear' into wildfly/standalone/deployments/
 - `Run Wildfly`: execute '/wildfly/bin/standalone.sh' script
 - `Browse the App`: 'http://localhost:8080/' 
+
+Run with docker:
+- `install required dependencies`: In the directory "provisioning/lib/" execute:
+```
+mvn install:install-file -DgroupId=javax.transaction -DartifactId=jta -Dversion=1.0.1B -Dpackaging=jar -Dfile=jta-1.0.1B.jar
+```
+- `Provision the Blog`: In the parent directory run 'mvn install' to provision the application using Maven.
+- `Build docker image`: execute "docker build . -t blog/wildfly" in "provisioning/docker/" directory
+- `Start Application`: execute "docker-compose up -d" in "provisioning/docker/" directory
+- `Browse the App`: 'http://localhost:8080/' 
+
 
 ![alt tag](http://puu.sh/tO8aT/c15dbe7b1b.png)
 ![alt tag](http://puu.sh/tO8kD/78b74a4722.png)
