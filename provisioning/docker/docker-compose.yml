@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mysqldb:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+        MYSQL_DATABASE: blog
+        MYSQL_USER: mysql
+        MYSQL_PASSWORD: mysql
+        MYSQL_ROOT_PASSWORD: supersecret
+  wildfly:
+    image: blog/wildfly:latest
+    environment:
+      - MYSQL_URI=mysqldb:3306
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb

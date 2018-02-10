@@ -2,3 +2,8 @@
 .settings/
 .idea
 .settings
+SoftUniJEE/target/
+SoftUniJEEEJB/target/
+SoftUniJEEWeb/SoftUniJEEWeb.iml
+SoftUniJEEWeb/target/
+
