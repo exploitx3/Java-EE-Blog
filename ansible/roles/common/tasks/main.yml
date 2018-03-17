@@ -1,0 +1,4 @@
+- name: Set OS Hostname
+  hostname: name={{ inventory_hostname }}
+
+- lineinfile: dest=/etc/hosts regexp='{{ inventory_hostname }}' line='127.0.0.1 {{ inventory_hostname }}' owner=root group=root mode=0644

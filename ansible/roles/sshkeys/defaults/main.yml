@@ -1,0 +1,4 @@
+---
+# defaults file for sshkeys
+
+sshkeys_user: ubuntu

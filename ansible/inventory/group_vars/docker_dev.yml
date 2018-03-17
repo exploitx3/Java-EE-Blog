@@ -1,0 +1,25 @@
+apt_packages:
+  - build-essential
+  - curl
+  - python-mysqldb
+  - python-pycurl
+  - python-software-properties
+  - libgmp3-dev
+  - apt-transport-https
+
+sshkeys_users:
+  - keyfile: exploitx.pub
+
+force_regenerate_certs: false
+
+dds_country: UK
+dds_state: London
+dds_locality: London
+dds_organization: None
+dds_host: '{{ansible_host}}'
+dds_passphrase: c11v5871683e23cp
+certs_base_path: '~/certs/{{inventory_hostname}}'
+dds_server_cert_path: '{{certs_base_path}}/'
+dds_client_cert_path: '{{certs_base_path}}/'
+
+docker_pki_dir: '{{playbook_dir}}/inventory/pki/{{inventory_hostname}}'

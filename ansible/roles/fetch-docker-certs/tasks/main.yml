@@ -1,0 +1,32 @@
+---
+
+- name: Create host_address file for easy dev access
+  template:
+    src: 'host_address.j2'
+    dest: '{{certs_base_path}}/host_address'
+
+- name: Fetch fingerprint
+  shell: 'ssh-keyscan -t rsa {{ansible_host}} | tee > {{certs_base_path}}/fingerprint'
+
+- name: Copy certs with expected prefix
+  copy:
+    src: '{{certs_base_path}}/{{item.source}}'
+    dest: '{{certs_base_path}}/{{inventory_hostname}}{{item.dest}}'
+    remote_src: true
+  with_items:
+    - {source: server-cert.pem, dest: '.pem'}
+    - {source: server-key.pem, dest: '-key.pem'}
+
+- name: Fetch certificates
+  fetch:
+    src: '{{certs_base_path}}/{{item}}'
+    dest: 'inventory/pki/{{inventory_hostname}}/'
+    flat: yes
+  with_items:
+    - ca.pem
+    - cert.pem
+    - key.pem
+    - '{{inventory_hostname}}.pem'
+    - '{{inventory_hostname}}-key.pem'
+    - host_address
+    - fingerprint

@@ -68,9 +68,40 @@ mvn install:install-file -DgroupId=javax.transaction -DartifactId=jta -Dversion=
 ```
 - `Provision the Blog`: In the parent directory run 'mvn install' to provision the application using Maven.
 - `Setup the ear`: Copy the created 'SoftUniJEE/target/SoftUniJEE-0.0.1-SNAPSHOT.ear' into "provisioning/docker/customization"
-- `Build docker image`: execute "docker build . -t blog/wildfly" in "provisioning/docker/" directory
+- `Build docker image`: execute "docker build . -t gapostolov/java-ee-blog" in "provisioning/docker/" directory
 - `Start Application`: execute "docker-compose up -d" in "provisioning/docker/" directory
 - `Browse the App`: 'http://localhost:8080/' 
+
+Run with docker:
+- `install required dependencies`: In the directory "provisioning/lib/" execute:
+```
+mvn install:install-file -DgroupId=javax.transaction -DartifactId=jta -Dversion=1.0.1B -Dpackaging=jar -Dfile=jta-1.0.1B.jar
+```
+- `Provision the Blog`: In the parent directory run 'mvn install' to provision the application using Maven.
+- `Setup the ear`: Copy the created 'SoftUniJEE/target/SoftUniJEE-0.0.1-SNAPSHOT.ear' into "provisioning/docker/customization"
+- `Build docker image`: execute "docker build . -t gapostolov/java-ee-blog" in "provisioning/docker/" directory
+- `Start Application`: execute "docker-compose up -d" in "provisioning/docker/" directory
+- `Browse the App`: 'http://localhost:8080/' 
+
+Run on AWS:
+- `Setup AWS EC2`: Create two ubuntu 16 Xenial machines with EIPs and install Python inside of them(required by ansible)
+- `Setup AWS RDS`: Create a new MySql instance with database name "blog" then provision it with provisioning scripts in "/provisioning/full_db_provisioning.sql"
+- `Edit Docker-Compose file`: Edit docker compose file with proper Database variables from RDS Instance
+- `Edit Ansible Hosts file`: edit ansible hosts files with new EIPs of EC2 machines "host_vars/dev-docker-01.yml" and "host_vars/dev-docker-02.yml"
+- `Configure Machines`: execute "ansible-playbook docker-infrastructure.yml -i ./inventory/dev-docker --key-file=<your aws keypair associated with machines>"
+- `Deploy docker stack`: execute "docker stack deploy -c ./provisioning/docker/docker-compose-aws.yml blog"
+- `Browse the App`: browse dev-docker-02 ip on port 80
+
+Setup AWS Infrastructure with CloudFormation and Ansible:
+- `Configure Ansible inventory`: Setup aws region in /inventory/ec2.ini
+- `Configure Ansible`: Setup ansible to use dynamic inventory 
+executing "export ANSIBLE_HOSTS=./inventory/aws_dynamic.py"
+ in "/ansible" directory
+
+Helpfull commands:
+ws cloudformation create-stack --stack-name blog-ee-simpljdava3 --template-body file://../provisioning/cloudformation/infrastructure.yml
+ansible -m ping tag_Name_docker_master --key-file ../../../aws-SA/exploitx/Exploitx.pem 
+./inventory/aws_dynamic.py --refresh-cache
 
 
 ![alt tag](http://puu.sh/tO8aT/c15dbe7b1b.png)

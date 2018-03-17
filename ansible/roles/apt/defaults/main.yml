@@ -1,0 +1,5 @@
+---
+# defaults file for apt
+
+apt_update_cache: yes
+apt_lang_pack: language-pack-en

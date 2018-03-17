@@ -1,0 +1,38 @@
+---
+# Whenever new host is added the playbook should run on local machine.
+# It will generate certificates that should be committed to the repository
+
+- hosts: tag_aws_cloudformation_stack_name_blog_ee_simpljdava3
+  sudo: yes
+  tasks:
+    - name: Check if certificate should be generated
+      shell: 'test -d {{certs_base_path}} && ls {{certs_base_path}} || echo ""'
+      register: ca_dir_contents
+
+    - name: expose fact
+      set_fact:
+       certificates_exist: '{{ca_dir_contents.stdout != ""}}'
+
+- hosts: tag_aws_cloudformation_stack_name_blog_ee_simpljdava3
+  sudo: yes
+  roles:
+    - { role: common,                     tags: common}
+    - { role: apt,                        tags: [apt,pkg,base] }
+    - { role: apt-upgrade,                tags: [aptupgrade,base] }
+    - { role: ntp,                        tags: [ntp,base] }
+    - { role: users,                      tags: [users,base] }
+    - { role: sshkeys,                    tags: [ssh], sshkeys_user: ubuntu }
+    #     - { role: nodejs,                     tags: [node,base] }
+    #     - { role: nginx,                      tags: [nginx,web,base] }
+    #     - { role: newrelic,                   tags: [newrelic] }
+    - { role: ansible.secure-docker-daemon, tags: [docker], when: (not certificates_exist) or (force_regenerate_certs | bool == true) }
+    - { role: fetch-docker-certs,         tags: [docker]}
+    - { role: andrewrothstein.docker,     tags: [docker] }
+    - { role: swarm-cluster,              tags: [swarm], when: ('docker_swarm_manager' in groups) }
+    - { role: docker-housekeeping,        tags: [docker]}
+
+- hosts: docker_hosts
+  sudo: yes
+  tasks:
+    - name: Restart docker service
+      shell: service docker restart

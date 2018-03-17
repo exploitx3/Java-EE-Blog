@@ -1,0 +1,9 @@
+---
+# tasks file for sshkeys
+
+- name: Ensure pubkey exists in authorized_keys
+  authorized_key: user={{ item.user | default(sshkeys_user) }}
+                  key="{{ lookup('file', item.keyfile) }}"
+                  state={{ item.state | default('present') }}
+  with_items: "{{ sshkeys_users }}"
+  when: sshkeys_users is defined

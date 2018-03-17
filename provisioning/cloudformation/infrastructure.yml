@@ -1,0 +1,108 @@
+Parameters:
+  EnvironmentSize:
+    Type: String
+    Default: SMALL
+    AllowedValues:
+      - SMALL
+      - MEDIUM
+      - LARGE
+    Description: Select Environment Size (S,M,L)
+  DatabaseName:
+    Type: String
+    Default: blog
+  DatabaseUser:
+    Type: String
+    Default: root
+  DatabasePassword:
+    Type: String
+    Default: toortoor
+    NoEcho: true
+Mappings:
+  RegionMap:
+    eu-west-1:
+      "UBUNTU17" : "ami-1b791862" # ubuntu-xenial-16.04-amd64-server-20180222
+      "KeyPair" : "IrelandKeyPair"
+    eu-west-2:
+      "KeyPair" : "Exploitx"
+      "UBUNTU17" : "ami-941e04f0" # ubuntu-xenial-16.04-amd64-server-20180222
+  InstanceSize:
+    SMALL:
+      "EC2" : "t2.micro"
+      "DB" : "db.t2.micro"
+    MEDIUM:
+      "EC2" : "t2.small"
+      "DB" : "db.t2.small"
+    LARGE:
+      "EC2" : "t2.medium"
+      "DB" : "db.t2.medium"
+Resources:
+
+  DB:
+    Type: "AWS::RDS::DBInstance"
+    DeletionPolicy: Snapshot
+    Properties:
+      AllocatedStorage: 5
+      StorageType: gp2
+      DBInstanceClass: !FindInMap [InstanceSize, !Ref EnvironmentSize, DB] # Dynamic mapping + Pseudo Parameter
+      DBName: !Ref DatabaseName
+      Engine: MySQL
+      MasterUsername: !Ref DatabaseUser
+      MasterUserPassword: !Ref DatabasePassword
+  MasterEC2:
+    Type: "AWS::EC2::Instance"
+    DeletionPolicy: Delete
+    Properties:
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", UBUNTU17] # Dynamic mapping + Pseudo Parameter
+      InstanceType: !FindInMap [InstanceSize, !Ref EnvironmentSize, EC2]
+      SecurityGroups:
+        - !Ref "SecGroup"
+      KeyName: !FindInMap [RegionMap, !Ref "AWS::Region", KeyPair]
+      Tags:
+        - Key: "Name"
+          Value: "docker-master"
+      UserData:
+        "Fn::Base64":
+          !Sub |
+            #!/bin/bash
+            sudo apt-get update
+            sudo apt-get install python -y
+
+  NodeEC2:
+    Type: "AWS::EC2::Instance"
+    DeletionPolicy: Delete
+    Properties:
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", UBUNTU17] # Dynamic mapping + Pseudo Parameter
+      InstanceType: !FindInMap [InstanceSize, !Ref EnvironmentSize, EC2]
+      SecurityGroups:
+        - !Ref "SecGroup"
+      KeyName: !FindInMap [RegionMap, !Ref "AWS::Region", KeyPair]
+      Tags:
+        - Key: "Name"
+          Value: "docker-node"
+      UserData:
+        "Fn::Base64":
+          !Sub |
+            #!/bin/bash
+            sudo apt-get update
+            sudo apt-get install python -y
+
+    Metadata:
+      AWS::CloudFormation::Init:
+        configSets:
+          provision:
+            - "install_python"
+        install_python:
+          packages:
+           - "python"
+
+  SecGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupName: AllowSSH2
+      GroupDescription: AllowSSH
+      SecurityGroupIngress:
+      -
+        IpProtocol: "tcp"
+        FromPort: "22"
+        ToPort: "22"
+        CidrIp: "0.0.0.0/0"

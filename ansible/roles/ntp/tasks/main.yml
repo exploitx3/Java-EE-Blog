@@ -1,0 +1,4 @@
+
+- name: Common | Install ntp
+  sudo: yes
+  apt: pkg=ntp

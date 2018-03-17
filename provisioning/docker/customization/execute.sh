@@ -27,7 +27,7 @@ $JBOSS_CLI -c << EOF
 batch
 
 #set CONNECTION_URL=jdbc:mysql://$MYSQL_SERVICE_SERVICE_HOST:$MYSQL_SERVICE_SERVICE_PORT/sample
-set CONNECTION_URL=jdbc:mysql://$MYSQL_URI/blog
+set CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
 echo "Connection URL: " $CONNECTION_URL
 
 # Add MySQL module
@@ -41,7 +41,7 @@ module add --name=com.mysql.jdbc.Driver --resources=/opt/jboss/wildfly/customiza
 #data-source add --name=mysqlDS --driver-name=mysql --jndi-name=java:jboss/datasources/ExampleMySQLDS --connection-url=jdbc:mysql://$MYSQL_SERVICE_HOST:$MYSQL_SERVICE_PORT/sample?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=mysql --password=mysql --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 #data-source add --name=mysqlDS --driver-name=mysql --jndi-name=java:jboss/datasources/ExampleMySQLDS --connection-url=jdbc:mysql://$DB_PORT_3306_TCP_ADDR:$DB_PORT_3306_TCP_PORT/sample?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=mysql --password=mysql --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 #data-source add --name=mysqlDS --driver-name=mysql --jndi-name=java:jboss/datasources/ExampleMySQLDS --connection-url=jdbc:mysql://$MYSQL_SERVICE_SERVICE_HOST:$MYSQL_SERVICE_SERVICE_PORT/sample --user-name=mysql --password=mysql --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
-data-source add  --jta=true --use-java-context=true --name=SoftUniDS --driver-name=mysql --jndi-name=java:/SoftUniDS --connection-url=jdbc:mysql://mysqldb:3306/blog?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=mysql --password=mysql --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
+data-source add  --jta=true --use-java-context=true --name=SoftUniDS --driver-name=mysql --jndi-name=java:/SoftUniDS --connection-url="jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE?useUnicode=true&amp;characterEncoding=UTF-8" --user-name="$MYSQL_USER" --password="$MYSQL_PASSWORD" --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 
 # Execute the batch
 run-batch

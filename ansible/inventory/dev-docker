@@ -1,0 +1,12 @@
+[docker_hosts]
+dev-docker-01
+dev-docker-02
+
+[docker_dev:children]
+docker_hosts
+
+[docker_swarm_manager]
+dev-docker-01
+
+[docker_swarm_worker]
+dev-docker-02

@@ -1,0 +1,2 @@
+- name: Upgrade apt packages
+  apt: upgrade=dist update_cache=yes

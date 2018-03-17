@@ -1,0 +1,5 @@
+---
+docker_config_files:
+  - d: etc/default
+    f: docker
+    m: '0644'

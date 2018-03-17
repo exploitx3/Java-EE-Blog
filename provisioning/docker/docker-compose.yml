@@ -4,16 +4,22 @@ services:
     image: mysql:latest
     ports:
       - "3306:3306"
+    deploy:
+      labels:
+        public: "true"
     environment:
         MYSQL_DATABASE: blog
         MYSQL_USER: mysql
         MYSQL_PASSWORD: mysql
         MYSQL_ROOT_PASSWORD: mysql
   wildfly:
-    image: blog/wildfly:latest
+    image: gapostolov/java-ee-blog
     environment:
-      - MYSQL_URI=mysqldb:3306
+      - "MYSQL_URI=mysqldb:3306"
+      - "MYSQL_DATABASE=blog"
+      - "MYSQL_USER=mysql"
+      - "MYSQL_PASSWORD=mysql"
     ports:
-      - 8080:8080
+      - 80:8080
     depends_on:
       - mysqldb

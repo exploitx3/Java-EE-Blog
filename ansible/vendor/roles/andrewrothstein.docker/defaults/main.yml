@@ -1,0 +1,52 @@
+---
+# to change the default docker0 bridge subnet
+#docker_bip : '10.123.0.1/16'
+
+#docker_dns_resolvers : 
+#  - '8.8.8.8'
+#  - '8.8.4.4'
+
+#docker_insecure_registries:
+#  - localhost:5000
+#  - https://trusted-remote-registry.mydomain.test
+
+# To install specific version, change the docker-engine package name to include version string as supported by OS specific package manager
+# eg. to install docker-engine v1.12.6 in Centos7, set docker_engine_pkg to docker-engine-1.12.6-1.el7.centos
+# Role will install latest version by default
+docker_engine_pkg: docker-engine
+
+docker_group: docker
+
+docker_tls: True
+docker_tls_bind: 0.0.0.0
+docker_tls_port: 2376
+
+docker_pki_key_suffix: '-key.pem'
+docker_pki_cert_suffix: '.pem'
+docker_pki_dir: '~/pki'
+
+# launch the docker service immediately following configuration
+docker_activate: True
+
+# configuring the docker cluster store
+# will only annouce to a cluster store if secured with TLS
+# assumes same key/certs to listen for connections and to talk to the K/V store
+#docker_cluster_store: consul://localhost:8500
+#docker_cluster_advertise_interface: eth1
+
+# controls the docker storage driver
+#docker_storage_driver: overlay2
+
+# additional docker storage driver options
+#docker_storage_opts:
+#  - dm.thinpooldev=/dev/mapper/docker-thinpool
+#  - dm.use_deferred_removal=true
+#  - dm.use_deferred_deletion=true
+
+# example flannel integration
+#docker_bip: ${FLANNEL_SUBNET}
+#docker_mtu: ${FLANNEL_MTU}
+#docker_systemd_envs:
+#  - /run/flannel/subnet.env
+#docker_systemd_afters:
+#  - flanneld.service

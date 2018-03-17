@@ -1,0 +1,35 @@
+---
+- name: add apt key
+  become: yes
+  become_user: root
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: docker repository
+  become: yes
+  become_user: root
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: install docker client tools
+  apt:
+    name: "{{item}}"
+  with_items:
+    - docker-ce
+
+- name: install docker compose v1.18.0
+  shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/bin/docker-compose
+  become: yes
+  become_user: root
+
+- name: ensure correct permisson on docker-compose executable
+  file:
+    path: /usr/bin/docker-compose
+    mode: "u=rwx,g=rx,o=rx"
+  become: yes
+  become_user: root
+
+- name: verify install was successful
+  shell: docker -v

@@ -1,0 +1,14 @@
+version: "3"
+services:
+  wildfly:
+    image: gapostolov/java-ee-blog
+    deploy:
+      labels:
+        public: "true"
+    environment:
+      - "MYSQL_URI=blog-db.cfqf8uznnvpx.eu-west-2.rds.amazonaws.com:3306"
+      - "MYSQL_DATABASE=blog"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=toor"
+    ports:
+      - 80:8080
